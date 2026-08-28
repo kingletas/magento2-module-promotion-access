@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * "What is this cart running, and does any of it give free shipping?"
  */
-final class CartPromotionsTest extends TestCase
+class CartPromotionsTest extends TestCase
 {
     /** @var array<int, array<string, mixed>> The salesrule table. */
     private array $rules = [];
@@ -65,8 +65,8 @@ final class CartPromotionsTest extends TestCase
             $freeShipping = $freeShipping || $reader->getFreeShipping($ruleId) === 1;
         }
 
-        self::assertSame([3, 7], $ruleIds);
-        self::assertTrue($freeShipping);
+        $this->assertSame([3, 7], $ruleIds);
+        $this->assertTrue($freeShipping);
     }
 
     public function testACartWithNoFreeShippingRuleIsNotGivenAny(): void
@@ -74,7 +74,7 @@ final class CartPromotionsTest extends TestCase
         $quote = $this->quoteWith('3');
         $reader = $this->reader();
 
-        self::assertSame(0, $reader->getFreeShipping(3));
+        $this->assertSame(0, $reader->getFreeShipping(3));
     }
 
     /**
@@ -85,9 +85,9 @@ final class CartPromotionsTest extends TestCase
     {
         $appliedRuleIds = new AppliedRuleIds();
 
-        self::assertSame([], $appliedRuleIds->forQuote($this->quoteWith(null)));
-        self::assertSame([], $appliedRuleIds->forQuote($this->quoteWith('')));
-        self::assertSame([], $appliedRuleIds->forQuote($this->quoteWith('0')));
+        $this->assertSame([], $appliedRuleIds->forQuote($this->quoteWith(null)));
+        $this->assertSame([], $appliedRuleIds->forQuote($this->quoteWith('')));
+        $this->assertSame([], $appliedRuleIds->forQuote($this->quoteWith('0')));
     }
 
     /**
@@ -98,7 +98,7 @@ final class CartPromotionsTest extends TestCase
     {
         $quote = $this->quoteWith(' 3 ,7,3,,0,');
 
-        self::assertSame([3, 7], (new AppliedRuleIds())->forQuote($quote));
+        $this->assertSame([3, 7], (new AppliedRuleIds())->forQuote($quote));
     }
 
     /**
@@ -109,9 +109,9 @@ final class CartPromotionsTest extends TestCase
     {
         $ruleId = $this->couponLocator()->findRuleIdByCode('SHIPFREE');
 
-        self::assertSame(7, $ruleId);
-        self::assertSame('Free shipping over 50', $this->reader()->getName($ruleId));
-        self::assertTrue($this->reader()->isAction($ruleId, 'by_fixed'));
+        $this->assertSame(7, $ruleId);
+        $this->assertSame('Free shipping over 50', $this->reader()->getName($ruleId));
+        $this->assertTrue($this->reader()->isAction($ruleId, 'by_fixed'));
     }
 
     /**
@@ -119,7 +119,7 @@ final class CartPromotionsTest extends TestCase
      */
     public function testACouponThatDoesNotExistLeadsNowhere(): void
     {
-        self::assertNull($this->couponLocator()->findRuleIdByCode('NOT-A-COUPON'));
+        $this->assertNull($this->couponLocator()->findRuleIdByCode('NOT-A-COUPON'));
     }
 
     /**
@@ -129,10 +129,10 @@ final class CartPromotionsTest extends TestCase
     {
         $reader = $this->reader();
 
-        self::assertFalse($reader->exists(42));
-        self::assertNull($reader->getSimpleAction(42));
-        self::assertNull($reader->getFreeShipping(42));
-        self::assertNull($reader->getName(42));
+        $this->assertFalse($reader->exists(42));
+        $this->assertNull($reader->getSimpleAction(42));
+        $this->assertNull($reader->getFreeShipping(42));
+        $this->assertNull($reader->getName(42));
     }
 
     /**
@@ -150,7 +150,7 @@ final class CartPromotionsTest extends TestCase
             $reader->getName($ruleId);
         }
 
-        self::assertSame(['salesrule'], array_values(array_unique($this->statements)));
+        $this->assertSame(['salesrule'], array_values(array_unique($this->statements)));
     }
 
     /**

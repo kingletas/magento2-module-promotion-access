@@ -15,7 +15,7 @@ use Magento\Framework\DB\Select;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-final class CouponRuleLocatorTest extends TestCase
+class CouponRuleLocatorTest extends TestCase
 {
     private AdapterInterface&MockObject $connection;
     private Select&MockObject $select;
@@ -46,7 +46,7 @@ final class CouponRuleLocatorTest extends TestCase
 
     public function testItResolvesACodeToItsRule(): void
     {
-        self::assertSame(7, $this->locator()->findRuleIdByCode('SAVE10'));
+        $this->assertSame(7, $this->locator()->findRuleIdByCode('SAVE10'));
     }
 
     /**
@@ -55,20 +55,20 @@ final class CouponRuleLocatorTest extends TestCase
      */
     public function testACodeNoCouponCarriesIsNull(): void
     {
-        self::assertNull($this->locator()->findRuleIdByCode('NOPE'));
+        $this->assertNull($this->locator()->findRuleIdByCode('NOPE'));
     }
 
     public function testASetOfCodesCostsOneQuery(): void
     {
         $found = $this->locator()->findRuleIdsByCodes(['SAVE10', 'REWARDS-ABC', 'NOPE']);
 
-        self::assertSame(1, $this->queries);
-        self::assertSame(['SAVE10' => 7, 'REWARDS-ABC' => 3], $found);
+        $this->assertSame(1, $this->queries);
+        $this->assertSame(['SAVE10' => 7, 'REWARDS-ABC' => 3], $found);
     }
 
     public function testUnresolvedCodesAreAbsentRatherThanNull(): void
     {
-        self::assertArrayNotHasKey('NOPE', $this->locator()->findRuleIdsByCodes(['NOPE']));
+        $this->assertArrayNotHasKey('NOPE', $this->locator()->findRuleIdsByCodes(['NOPE']));
     }
 
     public function testAMissIsRememberedSoItIsNotAskedTwice(): void
@@ -77,7 +77,7 @@ final class CouponRuleLocatorTest extends TestCase
         $locator->findRuleIdByCode('NOPE');
         $locator->findRuleIdByCode('NOPE');
 
-        self::assertSame(1, $this->queries);
+        $this->assertSame(1, $this->queries);
     }
 
     public function testOnlyCodesNotAlreadyKnownAreFetched(): void
@@ -86,18 +86,18 @@ final class CouponRuleLocatorTest extends TestCase
         $locator->findRuleIdByCode('SAVE10');
         $locator->findRuleIdsByCodes(['SAVE10', 'REWARDS-ABC']);
 
-        self::assertSame(['REWARDS-ABC'], $this->requested);
+        $this->assertSame(['REWARDS-ABC'], $this->requested);
     }
 
     public function testBlankCodesNeverReachTheDatabase(): void
     {
-        self::assertSame([], $this->locator()->findRuleIdsByCodes(['', '   ']));
-        self::assertSame(0, $this->queries);
+        $this->assertSame([], $this->locator()->findRuleIdsByCodes(['', '   ']));
+        $this->assertSame(0, $this->queries);
     }
 
     public function testSurroundingWhitespaceDoesNotMakeADifferentCode(): void
     {
-        self::assertSame(7, $this->locator()->findRuleIdByCode('  SAVE10 '));
+        $this->assertSame(7, $this->locator()->findRuleIdByCode('  SAVE10 '));
     }
 
     private function locator(): CouponRuleLocator

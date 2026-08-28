@@ -18,26 +18,26 @@ use PHPUnit\Framework\TestCase;
  *
  * @see DiWiringAssertions
  */
-final class DiWiringTest extends TestCase
+class DiWiringTest extends TestCase
 {
     use DiWiringAssertions;
 
     public function testEveryInjectedInterfaceCanBeResolvedByTheObjectManager(): void
     {
-        self::assertEveryInjectedInterfaceIsResolvable(self::moduleDir());
+        $this->assertEveryInjectedInterfaceIsResolvable($this->moduleDir());
     }
 
     public function testEveryPreferenceNamesAClassThatExistsAndImplementsIt(): void
     {
-        self::assertEveryPreferenceResolvesToAnImplementation(self::moduleDir());
+        $this->assertEveryPreferenceResolvesToAnImplementation($this->moduleDir());
     }
 
     public function testNoVirtualTypeIsReferencedThroughAGeneratedProxy(): void
     {
-        self::assertNoVirtualTypeIsReferencedThroughAGeneratedProxy(self::moduleDir());
+        $this->assertNoVirtualTypeIsReferencedThroughAGeneratedProxy($this->moduleDir());
     }
 
-    private static function moduleDir(): string
+    private function moduleDir(): string
     {
         return dirname(__DIR__, 2);
     }

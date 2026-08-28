@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * What reading a promotion costs.
  */
-final class RuleReadCostTest extends TestCase
+class RuleReadCostTest extends TestCase
 {
     use BudgetAssertions;
 
@@ -52,7 +52,7 @@ final class RuleReadCostTest extends TestCase
      */
     public function testReadingManyRulesCostsTheSameAsReadingOne(): void
     {
-        self::assertConstantCost(
+        $this->assertConstantCost(
             'queries while reading rule actions',
             function (int $rules): int {
                 $this->queries = 0;
@@ -80,7 +80,7 @@ final class RuleReadCostTest extends TestCase
         $reader->getName(1);
         $reader->exists(1);
 
-        self::assertCostAtMost('four reads of one rule', 1, $this->queries);
+        $this->assertCostAtMost('four reads of one rule', 1, $this->queries);
     }
 
     /**
@@ -97,12 +97,12 @@ final class RuleReadCostTest extends TestCase
 
         $reader->getSimpleActions([1, 2, 3]);
 
-        self::assertSame($afterFirst, $this->queries, 'A fully-memoised batch should ask nothing.');
+        $this->assertSame($afterFirst, $this->queries, 'A fully-memoised batch should ask nothing.');
 
         $reader->getSimpleActions([3, 4, 5]);
 
-        self::assertSame($afterFirst + 1, $this->queries, 'Only the two new ids needed a query.');
-        self::assertSame([4, 5], array_values(array_map('intval', $this->requested)));
+        $this->assertSame($afterFirst + 1, $this->queries, 'Only the two new ids needed a query.');
+        $this->assertSame([4, 5], array_values(array_map('intval', $this->requested)));
     }
 
     /**
@@ -120,7 +120,7 @@ final class RuleReadCostTest extends TestCase
         $reader->getSimpleAction(42);
         $reader->getName(42);
 
-        self::assertCostAtMost('re-asking about a deleted rule', $afterFirst, $this->queries);
+        $this->assertCostAtMost('re-asking about a deleted rule', $afterFirst, $this->queries);
     }
 
     /**
@@ -131,7 +131,7 @@ final class RuleReadCostTest extends TestCase
     {
         $this->reader()->getSimpleActions([0, -1]);
 
-        self::assertSame(0, $this->queries);
+        $this->assertSame(0, $this->queries);
     }
 
     /**
@@ -140,7 +140,7 @@ final class RuleReadCostTest extends TestCase
      */
     public function testResolvingManyCouponCodesCostsTheSameAsResolvingOne(): void
     {
-        self::assertConstantCost(
+        $this->assertConstantCost(
             'queries while resolving coupon codes',
             function (int $codes): int {
                 $this->queries = 0;

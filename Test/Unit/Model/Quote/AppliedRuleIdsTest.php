@@ -11,7 +11,7 @@ use Commerce\PromotionAccess\Model\Quote\AppliedRuleIds;
 use Magento\Quote\Model\Quote;
 use PHPUnit\Framework\TestCase;
 
-final class AppliedRuleIdsTest extends TestCase
+class AppliedRuleIdsTest extends TestCase
 {
     private AppliedRuleIds $ids;
 
@@ -25,24 +25,24 @@ final class AppliedRuleIdsTest extends TestCase
      */
     public function testAnEmptyStringYieldsNoRulesRatherThanRuleZero(): void
     {
-        self::assertSame([], $this->ids->parse(''));
-        self::assertSame([], $this->ids->parse(null));
-        self::assertSame([], $this->ids->parse('   '));
+        $this->assertSame([], $this->ids->parse(''));
+        $this->assertSame([], $this->ids->parse(null));
+        $this->assertSame([], $this->ids->parse('   '));
     }
 
     public function testItReadsTheIdsInTheOrderTheyWereStored(): void
     {
-        self::assertSame([7, 3, 11], $this->ids->parse('7,3,11'));
+        $this->assertSame([7, 3, 11], $this->ids->parse('7,3,11'));
     }
 
     public function testWhitespaceAroundIdsIsToleratedRatherThanCastToZero(): void
     {
-        self::assertSame([7, 3], $this->ids->parse(' 7 , 3 '));
+        $this->assertSame([7, 3], $this->ids->parse(' 7 , 3 '));
     }
 
     public function testARepeatedIdIsAskedAboutOnce(): void
     {
-        self::assertSame([7, 3], $this->ids->parse('7,3,7,7'));
+        $this->assertSame([7, 3], $this->ids->parse('7,3,7,7'));
     }
 
     /**
@@ -50,19 +50,19 @@ final class AppliedRuleIdsTest extends TestCase
      */
     public function testTrailingAndDoubledSeparatorsDoNotProduceRuleZero(): void
     {
-        self::assertSame([7], $this->ids->parse('7,'));
-        self::assertSame([7, 3], $this->ids->parse('7,,3'));
-        self::assertSame([], $this->ids->parse(','));
+        $this->assertSame([7], $this->ids->parse('7,'));
+        $this->assertSame([7, 3], $this->ids->parse('7,,3'));
+        $this->assertSame([], $this->ids->parse(','));
     }
 
     public function testNonNumericAndNegativeValuesAreDroppedRatherThanCast(): void
     {
-        self::assertSame([3], $this->ids->parse('abc,-5,0,3'));
+        $this->assertSame([3], $this->ids->parse('abc,-5,0,3'));
     }
 
     public function testItReadsTheValueOffAQuote(): void
     {
-        self::assertSame([4, 9], $this->ids->forQuote($this->quoteWith('4,9')));
+        $this->assertSame([4, 9], $this->ids->forQuote($this->quoteWith('4,9')));
     }
 
     /**
@@ -71,7 +71,7 @@ final class AppliedRuleIdsTest extends TestCase
      */
     public function testAQuoteThatHasNeverCollectedTotalsYieldsNoRules(): void
     {
-        self::assertSame([], $this->ids->forQuote($this->quoteWith(null)));
+        $this->assertSame([], $this->ids->forQuote($this->quoteWith(null)));
     }
 
     /**

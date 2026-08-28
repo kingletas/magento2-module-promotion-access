@@ -57,12 +57,12 @@ class StagedEntityFilterTest extends TestCase
     {
         $this->linkFields = [ProductInterface::class => 'row_id'];
 
-        self::assertSame('row_id', $this->filter()->getLinkField(ProductInterface::class));
+        $this->assertSame('row_id', $this->filter()->getLinkField(ProductInterface::class));
     }
 
     public function testAnUnstagedInstallationLinksOnTheEntityId(): void
     {
-        self::assertSame('entity_id', $this->filter()->getLinkField(ProductInterface::class));
+        $this->assertSame('entity_id', $this->filter()->getLinkField(ProductInterface::class));
     }
 
     /**
@@ -71,7 +71,7 @@ class StagedEntityFilterTest extends TestCase
      */
     public function testAnEntityWithNoRegisteredMetadataFallsBackToTheEntityId(): void
     {
-        self::assertSame('entity_id', $this->filter()->getLinkField(CategoryInterface::class));
+        $this->assertSame('entity_id', $this->filter()->getLinkField(CategoryInterface::class));
     }
 
     /**
@@ -82,7 +82,7 @@ class StagedEntityFilterTest extends TestCase
     {
         $this->linkFields = [ProductInterface::class => ''];
 
-        self::assertSame('entity_id', $this->filter()->getLinkField(ProductInterface::class));
+        $this->assertSame('entity_id', $this->filter()->getLinkField(ProductInterface::class));
     }
 
     /**
@@ -95,7 +95,7 @@ class StagedEntityFilterTest extends TestCase
         $filter->getLinkField(ProductInterface::class);
         $filter->getLinkField(ProductInterface::class);
 
-        self::assertSame(1, $this->metadataLookups);
+        $this->assertSame(1, $this->metadataLookups);
     }
 
     /**
@@ -113,7 +113,7 @@ class StagedEntityFilterTest extends TestCase
             self::NOW
         );
 
-        self::assertSame(
+        $this->assertSame(
             [
                 ['condition' => 'e.created_in <= ?', 'value' => self::NOW],
                 ['condition' => 'e.updated_in > ?', 'value' => self::NOW],
@@ -132,9 +132,9 @@ class StagedEntityFilterTest extends TestCase
 
         $this->filter()->applyCurrentVersion($this->select(), 'e', 'catalog_category_entity', self::NOW);
 
-        self::assertStringContainsString('<=', $this->conditions[0]['condition']);
-        self::assertStringContainsString('>', $this->conditions[1]['condition']);
-        self::assertStringNotContainsString('>=', $this->conditions[1]['condition']);
+        $this->assertStringContainsString('<=', $this->conditions[0]['condition']);
+        $this->assertStringContainsString('>', $this->conditions[1]['condition']);
+        $this->assertStringNotContainsString('>=', $this->conditions[1]['condition']);
     }
 
     /**
@@ -145,7 +145,7 @@ class StagedEntityFilterTest extends TestCase
     {
         $this->filter()->applyCurrentVersion($this->select(), 'e', 'catalog_category_entity', self::NOW);
 
-        self::assertSame([], $this->conditions);
+        $this->assertSame([], $this->conditions);
     }
 
     /**
@@ -158,7 +158,7 @@ class StagedEntityFilterTest extends TestCase
 
         $this->filter()->applyCurrentVersion($this->select(), 'cat', 'catalog_category_entity', self::NOW);
 
-        self::assertStringStartsWith('cat.', $this->conditions[0]['condition']);
+        $this->assertStringStartsWith('cat.', $this->conditions[0]['condition']);
     }
 
     /**
@@ -170,9 +170,9 @@ class StagedEntityFilterTest extends TestCase
         $this->stagedTables = ['catalog_category_entity'];
         $filter = $this->filter();
 
-        self::assertTrue($filter->isStaged('catalog_category_entity'));
-        self::assertFalse($filter->isStaged('catalog_product_entity'));
-        self::assertSame(
+        $this->assertTrue($filter->isStaged('catalog_category_entity'));
+        $this->assertFalse($filter->isStaged('catalog_product_entity'));
+        $this->assertSame(
             ['catalog_category_entity', 'catalog_product_entity'],
             $this->columnChecks
         );
@@ -190,7 +190,7 @@ class StagedEntityFilterTest extends TestCase
         $filter->isStaged('catalog_category_entity');
         $filter->applyCurrentVersion($this->select(), 'e', 'catalog_category_entity', self::NOW);
 
-        self::assertSame(['catalog_category_entity'], $this->columnChecks);
+        $this->assertSame(['catalog_category_entity'], $this->columnChecks);
     }
 
     /**
@@ -204,7 +204,7 @@ class StagedEntityFilterTest extends TestCase
 
         $this->filter()->applyCurrentVersion($this->select(), 'e', 'catalog_category_entity');
 
-        self::assertEqualsWithDelta($before, $this->conditions[0]['value'], 5);
+        $this->assertEqualsWithDelta($before, $this->conditions[0]['value'], 5);
     }
 
     private function filter(): StagedEntityFilter

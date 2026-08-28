@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Reading a rule's scalars without building the rule.
  */
-final class RuleFieldReaderTest extends TestCase
+class RuleFieldReaderTest extends TestCase
 {
     private AdapterInterface&MockObject $connection;
     private StagedEntityFilter&MockObject $staging;
@@ -65,19 +65,19 @@ final class RuleFieldReaderTest extends TestCase
 
     public function testItReadsTheSimpleAction(): void
     {
-        self::assertSame('expedited_shipping', $this->reader()->getSimpleAction(7));
+        $this->assertSame('expedited_shipping', $this->reader()->getSimpleAction(7));
     }
 
     public function testARuleThatDoesNotExistHasNoAction(): void
     {
-        self::assertNull($this->reader()->getSimpleAction(404));
-        self::assertFalse($this->reader()->exists(404));
+        $this->assertNull($this->reader()->getSimpleAction(404));
+        $this->assertFalse($this->reader()->exists(404));
     }
 
     public function testAnEmptyActionReadsAsNullRatherThanAnEmptyString(): void
     {
-        self::assertNull($this->reader()->getSimpleAction(9));
-        self::assertTrue($this->reader()->exists(9), 'the rule exists, its action is simply unset');
+        $this->assertNull($this->reader()->getSimpleAction(9));
+        $this->assertTrue($this->reader()->exists(9), 'the rule exists, its action is simply unset');
     }
 
     /**
@@ -87,18 +87,18 @@ final class RuleFieldReaderTest extends TestCase
     {
         $reader = $this->reader();
 
-        self::assertTrue($reader->isAction(7, 'expedited_shipping'));
-        self::assertFalse($reader->isAction(3, 'expedited_shipping'));
-        self::assertFalse($reader->isAction(404, 'expedited_shipping'));
+        $this->assertTrue($reader->isAction(7, 'expedited_shipping'));
+        $this->assertFalse($reader->isAction(3, 'expedited_shipping'));
+        $this->assertFalse($reader->isAction(404, 'expedited_shipping'));
     }
 
     public function testFreeShippingIsReturnedAsItsNumberNotABoolean(): void
     {
         $reader = $this->reader();
 
-        self::assertSame(1, $reader->getFreeShipping(3));
-        self::assertSame(0, $reader->getFreeShipping(7));
-        self::assertNull($reader->getFreeShipping(9));
+        $this->assertSame(1, $reader->getFreeShipping(3));
+        $this->assertSame(0, $reader->getFreeShipping(7));
+        $this->assertNull($reader->getFreeShipping(9));
     }
 
     /**
@@ -108,8 +108,8 @@ final class RuleFieldReaderTest extends TestCase
     {
         $actions = $this->reader()->getSimpleActions([7, 3, 9]);
 
-        self::assertSame(1, $this->queries);
-        self::assertSame(['expedited_shipping', 'by_percent', null], array_values($actions));
+        $this->assertSame(1, $this->queries);
+        $this->assertSame(['expedited_shipping', 'by_percent', null], array_values($actions));
     }
 
     public function testTheSecondQuestionAboutARuleCostsNothing(): void
@@ -119,7 +119,7 @@ final class RuleFieldReaderTest extends TestCase
         $reader->getFreeShipping(7);
         $reader->getName(7);
 
-        self::assertSame(1, $this->queries, 'all three come off one row');
+        $this->assertSame(1, $this->queries, 'all three come off one row');
     }
 
     /**
@@ -132,7 +132,7 @@ final class RuleFieldReaderTest extends TestCase
         $reader->getSimpleAction(404);
         $reader->getSimpleAction(404);
 
-        self::assertSame(1, $this->queries);
+        $this->assertSame(1, $this->queries);
     }
 
     public function testOnlyTheRulesNotAlreadyKnownAreFetched(): void
@@ -141,14 +141,14 @@ final class RuleFieldReaderTest extends TestCase
         $reader->getSimpleAction(7);
         $reader->getSimpleActions([7, 3]);
 
-        self::assertSame([3], $this->requested, 'the second read asks only for what it lacks');
-        self::assertSame(2, $this->queries);
+        $this->assertSame([3], $this->requested, 'the second read asks only for what it lacks');
+        $this->assertSame(2, $this->queries);
     }
 
     public function testIdsThatCannotBeRuleIdsNeverReachTheDatabase(): void
     {
-        self::assertSame([], $this->reader()->getSimpleActions([0, -1]));
-        self::assertSame(0, $this->queries);
+        $this->assertSame([], $this->reader()->getSimpleActions([0, -1]));
+        $this->assertSame(0, $this->queries);
     }
 
     /**
@@ -157,9 +157,9 @@ final class RuleFieldReaderTest extends TestCase
      */
     public function testTheLiveVersionWindowIsAppliedToEveryRead(): void
     {
-        $this->staging->expects(self::once())
+        $this->staging->expects($this->once())
             ->method('applyCurrentVersion')
-            ->with($this->select, 'r', self::stringContains('salesrule'));
+            ->with($this->select, 'r', $this->stringContains('salesrule'));
 
         $this->reader()->getSimpleAction(7);
     }
