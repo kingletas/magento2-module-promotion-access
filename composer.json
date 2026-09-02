@@ -3,6 +3,20 @@
     "description": "The safe way to read cart price rules: a rule's action and free-shipping setting, the rules a quote has applied, and the rule behind a coupon code. Batched, staging-aware and memoised, so the questions that are a column lookup stop costing a hydrated rule.",
     "type": "magento2-module",
     "license": "OSL-3.0",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/kingletas/magento2-module-foundation"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/kingletas/magento2-module-logger"
+        }
+    ],
     "require": {
         "php": ">=8.4",
         "commerce/module-foundation": "^1.0",
