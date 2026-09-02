@@ -75,7 +75,13 @@ The query does not fail. It returns every version and whichever sorts first wins
 ## Tests
 
 ```bash
-M2_VENDOR=/path/to/magento/vendor vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite unit
+make check
+```
+
+The coding standard and all four suites — 75 tests, no database and no Magento bootstrap. Narrow it to one suite with `SUITE`:
+
+```bash
+make test SUITE=behaviour
 ```
 
 36 tests. The ones worth knowing about pin the three defects above: that an empty `applied_rule_ids` yields no rules rather than rule zero, that a set of rule ids costs one query and a repeat costs none, and that the live version window is applied to every read.
