@@ -15,6 +15,11 @@ parameters:
         - Test/*
     treatPhpDocTypesAsCertain: false
     ignoreErrors:
+        # applied_rule_ids is a quote column rather than a CartInterface method,
+        # so it arrives through the model's __call.
+        -
+            message: '#Call to an undefined method Magento\\Quote\\Api\\Data\\CartInterface::getAppliedRuleIds\(\)#'
+            path: Model/Quote/AppliedRuleIds.php
+            reportUnmatched: false
         # Magento's models expose their columns through __call, so every
         # getter on a core model is invisible to static analysis.
-        - '#Call to an undefined method Magento\\[A-Za-z\\]+::(get|set|has)[A-Za-z]+\(\)#'
