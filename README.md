@@ -75,6 +75,7 @@ The query doesn't fail. It returns every version and whichever sorts first wins,
 ## Tests
 
 ```bash
+make install    # needs repo.magento.com credentials, for magento/framework
 make check
 ```
 
