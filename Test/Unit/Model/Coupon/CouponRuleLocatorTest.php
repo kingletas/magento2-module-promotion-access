@@ -1,16 +1,16 @@
 <?php
 /**
- * @package   Commerce_PromotionAccess
- * @copyright Copyright (c) the Commerce modules authors
+ * @package   Kingletas_PromotionAccess
+ * @copyright Copyright (c) the Kingletas modules authors
  * @license   OSL-3.0 https://opensource.org/licenses/OSL-3.0
  */
 
 declare(strict_types=1);
 
-namespace Commerce\PromotionAccess\Test\Unit\Model\Coupon;
+namespace Kingletas\PromotionAccess\Test\Unit\Model\Coupon;
 
-use Commerce\PromotionAccess\Model\Coupon\CouponRuleLocator;
-use Commerce\PromotionAccess\Model\Memo\RequestMemo;
+use Kingletas\PromotionAccess\Model\Coupon\CouponRuleLocator;
+use Kingletas\PromotionAccess\Model\Memo\RequestMemo;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Select;

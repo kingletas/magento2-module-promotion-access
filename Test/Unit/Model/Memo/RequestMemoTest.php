@@ -1,15 +1,15 @@
 <?php
 /**
- * @package   Commerce_PromotionAccess
- * @copyright Copyright (c) the Commerce modules authors
+ * @package   Kingletas_PromotionAccess
+ * @copyright Copyright (c) the Kingletas modules authors
  * @license   OSL-3.0 https://opensource.org/licenses/OSL-3.0
  */
 
 declare(strict_types=1);
 
-namespace Commerce\PromotionAccess\Test\Unit\Model\Memo;
+namespace Kingletas\PromotionAccess\Test\Unit\Model\Memo;
 
-use Commerce\PromotionAccess\Model\Memo\RequestMemo;
+use Kingletas\PromotionAccess\Model\Memo\RequestMemo;
 use PHPUnit\Framework\TestCase;
 
 class RequestMemoTest extends TestCase

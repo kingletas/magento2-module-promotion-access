@@ -2,38 +2,38 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <preference for="Commerce\PromotionAccess\Api\RuleFieldReaderInterface"
-                type="Commerce\PromotionAccess\Model\Rule\RuleFieldReader"/>
-    <preference for="Commerce\PromotionAccess\Api\AppliedRuleIdsInterface"
-                type="Commerce\PromotionAccess\Model\Quote\AppliedRuleIds"/>
-    <preference for="Commerce\PromotionAccess\Api\CouponRuleLocatorInterface"
-                type="Commerce\PromotionAccess\Model\Coupon\CouponRuleLocator"/>
+    <preference for="Kingletas\PromotionAccess\Api\RuleFieldReaderInterface"
+                type="Kingletas\PromotionAccess\Model\Rule\RuleFieldReader"/>
+    <preference for="Kingletas\PromotionAccess\Api\AppliedRuleIdsInterface"
+                type="Kingletas\PromotionAccess\Model\Quote\AppliedRuleIds"/>
+    <preference for="Kingletas\PromotionAccess\Api\CouponRuleLocatorInterface"
+                type="Kingletas\PromotionAccess\Model\Coupon\CouponRuleLocator"/>
 
     <!--
         A memo per consumer: the container shares one instance per type, and
         these hold rows, not entities.
     -->
-    <virtualType name="Commerce\PromotionAccess\Model\Memo\RuleFieldMemo"
-                 type="Commerce\PromotionAccess\Model\Memo\RequestMemo">
+    <virtualType name="Kingletas\PromotionAccess\Model\Memo\RuleFieldMemo"
+                 type="Kingletas\PromotionAccess\Model\Memo\RequestMemo">
         <arguments>
             <argument name="limit" xsi:type="number">2000</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Commerce\PromotionAccess\Model\Memo\CouponRuleMemo"
-                 type="Commerce\PromotionAccess\Model\Memo\RequestMemo">
+    <virtualType name="Kingletas\PromotionAccess\Model\Memo\CouponRuleMemo"
+                 type="Kingletas\PromotionAccess\Model\Memo\RequestMemo">
         <arguments>
             <argument name="limit" xsi:type="number">2000</argument>
         </arguments>
     </virtualType>
 
-    <type name="Commerce\PromotionAccess\Model\Rule\RuleFieldReader">
+    <type name="Kingletas\PromotionAccess\Model\Rule\RuleFieldReader">
         <arguments>
-            <argument name="memo" xsi:type="object">Commerce\PromotionAccess\Model\Memo\RuleFieldMemo</argument>
+            <argument name="memo" xsi:type="object">Kingletas\PromotionAccess\Model\Memo\RuleFieldMemo</argument>
         </arguments>
     </type>
-    <type name="Commerce\PromotionAccess\Model\Coupon\CouponRuleLocator">
+    <type name="Kingletas\PromotionAccess\Model\Coupon\CouponRuleLocator">
         <arguments>
-            <argument name="memo" xsi:type="object">Commerce\PromotionAccess\Model\Memo\CouponRuleMemo</argument>
+            <argument name="memo" xsi:type="object">Kingletas\PromotionAccess\Model\Memo\CouponRuleMemo</argument>
         </arguments>
     </type>
 

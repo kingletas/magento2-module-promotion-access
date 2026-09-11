@@ -1,15 +1,15 @@
 <?php
 /**
- * @package   Commerce_PromotionAccess
- * @copyright Copyright (c) the Commerce modules authors
+ * @package   Kingletas_PromotionAccess
+ * @copyright Copyright (c) the Kingletas modules authors
  * @license   OSL-3.0 https://opensource.org/licenses/OSL-3.0
  */
 
 declare(strict_types=1);
 
-namespace Commerce\PromotionAccess\Test\Unit\Model\Db;
+namespace Kingletas\PromotionAccess\Test\Unit\Model\Db;
 
-use Commerce\PromotionAccess\Model\Db\StagedEntityFilter;
+use Kingletas\PromotionAccess\Model\Db\StagedEntityFilter;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\App\ResourceConnection;
@@ -162,7 +162,7 @@ class StagedEntityFilterTest extends TestCase
 
     /**
      * The presence of the column is the feature test, because Staging is
-     * Commerce-only.
+     * Adobe Commerce-only.
      */
     public function testStagingIsDetectedByTheColumnRatherThanByTheModule(): void
     {

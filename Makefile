@@ -1,4 +1,4 @@
-# commerce/module-promotion-access
+# kingletas/module-promotion-access
 #
 # Run `make` with no arguments for the list.
 #
@@ -40,7 +40,7 @@ GUARD := $(if $(HARNESS),guard-harness,guard-package)
 .PHONY: help
 help: ## Show this help
 	@echo
-	@echo "  commerce/module-promotion-access"
+	@echo "  kingletas/module-promotion-access"
 	@echo
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "    \033[36m%-12s\033[0m %s\n", $$1, $$2}'

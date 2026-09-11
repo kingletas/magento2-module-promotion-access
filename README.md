@@ -1,8 +1,8 @@
-# Commerce_PromotionAccess
+# Kingletas_PromotionAccess
 
 The handful of cart price rule reads that every module ends up writing — what kind of promotion is this, does it give free shipping, which rules is this cart running, which rule issued this coupon — written once, without loading a rule to answer any of them.
 
-It's the promotions half of what [`Commerce_CatalogAccess`](https://github.com/kingletas/magento2-module-catalog-access) does for the catalogue, and it exists for the same reason: each of these is easy enough to write inline in four lines, and each of those four-line versions has the same defect as the last one.
+It's the promotions half of what [`Kingletas_CatalogAccess`](https://github.com/kingletas/magento2-module-catalog-access) does for the catalogue, and it exists for the same reason: each of these is easy enough to write inline in four lines, and each of those four-line versions has the same defect as the last one.
 
 ---
 

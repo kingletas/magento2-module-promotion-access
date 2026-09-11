@@ -1,5 +1,5 @@
 {
-    "name": "commerce/module-promotion-access",
+    "name": "kingletas/module-promotion-access",
     "description": "The safe way to read cart price rules: a rule's action and free-shipping setting, the rules a quote has applied, and the rule behind a coupon code. Batched, staging-aware and memoised, so the questions that are a column lookup stop costing a hydrated rule.",
     "type": "magento2-module",
     "license": "OSL-3.0",
@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=8.4",
-        "commerce/module-foundation": "^1.0",
+        "kingletas/module-foundation": "^1.0",
         "magento/framework": ">=103.0",
         "magento/module-quote": ">=101.2",
         "magento/module-sales-rule": ">=101.2"
@@ -37,7 +37,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Commerce\\PromotionAccess\\": ""
+            "Kingletas\\PromotionAccess\\": ""
         },
         "exclude-from-classmap": [
             "/Test/"

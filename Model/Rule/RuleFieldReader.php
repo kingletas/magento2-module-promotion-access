@@ -1,17 +1,17 @@
 <?php
 /**
- * @package   Commerce_PromotionAccess
- * @copyright Copyright (c) the Commerce modules authors
+ * @package   Kingletas_PromotionAccess
+ * @copyright Copyright (c) the Kingletas modules authors
  * @license   OSL-3.0 https://opensource.org/licenses/OSL-3.0
  */
 
 declare(strict_types=1);
 
-namespace Commerce\PromotionAccess\Model\Rule;
+namespace Kingletas\PromotionAccess\Model\Rule;
 
-use Commerce\PromotionAccess\Api\RuleFieldReaderInterface;
-use Commerce\PromotionAccess\Model\Db\StagedEntityFilter;
-use Commerce\PromotionAccess\Model\Memo\RequestMemo;
+use Kingletas\PromotionAccess\Api\RuleFieldReaderInterface;
+use Kingletas\PromotionAccess\Model\Db\StagedEntityFilter;
+use Kingletas\PromotionAccess\Model\Memo\RequestMemo;
 use Magento\Framework\App\ResourceConnection;
 
 /**

@@ -27,7 +27,7 @@ Say what problem that solves, in the reader's own terms, before any mechanics.
 ## Step 1: install it
 
 ```bash
-composer require commerce/module-promotion-access
+composer require kingletas/module-promotion-access
 ```
 
 ## Step 2: point it at something

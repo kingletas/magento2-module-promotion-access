@@ -1,15 +1,15 @@
 <?php
 /**
- * @package   Commerce_PromotionAccess
- * @copyright Copyright (c) the Commerce modules authors
+ * @package   Kingletas_PromotionAccess
+ * @copyright Copyright (c) the Kingletas modules authors
  * @license   OSL-3.0 https://opensource.org/licenses/OSL-3.0
  */
 
 declare(strict_types=1);
 
-namespace Commerce\PromotionAccess\Model\Quote;
+namespace Kingletas\PromotionAccess\Model\Quote;
 
-use Commerce\PromotionAccess\Api\AppliedRuleIdsInterface;
+use Kingletas\PromotionAccess\Api\AppliedRuleIdsInterface;
 use Magento\Quote\Api\Data\CartInterface;
 
 /**
